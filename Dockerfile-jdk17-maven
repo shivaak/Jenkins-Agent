@@ -1,0 +1,11 @@
+# Dockerfile-jdk17
+
+# Use Jenkins Inbound Agent with JDK 17 as the base image
+FROM jenkins/inbound-agent:latest-alpine-jdk17
+
+USER root
+
+# Install Maven
+RUN apk add --no-cache maven git
+
+USER jenkins

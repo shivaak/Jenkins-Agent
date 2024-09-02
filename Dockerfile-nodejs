@@ -1,0 +1,19 @@
+# Dockerfile for ReactJS builds
+
+# Use Jenkins Inbound Agent as the base image
+FROM jenkins/inbound-agent:latest-alpine
+
+USER root
+
+# Install dependencies for Node.js and Yarn
+RUN apk add --no-cache \
+    nodejs \
+    npm \
+    yarn \
+    git
+
+# Optionally install a specific version of Node.js (if required)
+# RUN npm install -g n
+# RUN n 18.14.0  # Replace with your desired Node.js version
+
+USER jenkins
