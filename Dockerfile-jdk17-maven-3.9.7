@@ -1,0 +1,18 @@
+FROM jenkins/inbound-agent:latest-alpine-jdk17
+
+USER root
+
+# Install dependencies for Maven
+RUN apk add --no-cache curl tar bash
+
+# Set Maven version
+ENV MAVEN_VERSION=3.9.7
+
+# Download and install Maven
+RUN curl -fsSL https://downloads.apache.org/maven/maven-3/${MAVEN_VERSION}/binaries/apache-maven-${MAVEN_VERSION}-bin.tar.gz | tar -xz -C /opt \
+    && ln -s /opt/apache-maven-${MAVEN_VERSION}/bin/mvn /usr/bin/mvn
+
+# Clean up unnecessary files
+RUN apk del curl tar
+
+USER jenkins
